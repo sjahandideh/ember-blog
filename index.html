@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <title>Ember blog</title>
+    <link rel='stylesheet' href='css/normalize.css'>
+    <link rel='stylesheet' href='css/bootstrap.min.css'>
+    <link rel='stylesheet' href='css/style.css'>
+  </head>
+  <body>
+    <script type='text/x-handlebars'>
+      <div class='navbar'>
+        <div class='navbar-inner'>
+          <a class="brand" href="#">Test</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li>{{#linkTo 'posts'}}Blog{{/linkTo}}</li>
+            <li>{{#linkTo 'about'}}About{{/linkTo}}</li>
+          </ul>
+        </div>
+      </div>
+
+      {{outlet}}
+    </script>
+
+    <script type='text/x-handlebars' id='posts'>
+      <div style="">
+        {{#each model}}
+          <div class="post">
+            <h4 class="list-group-item-heading">{{#linkTo 'post' this}} {{title}} {{/linkTo}}</h4>
+            <p class="list-group-item-text">by {{author}}</p>
+          </div>
+        {{/each}}
+      </div>
+      <div style="">
+        {{outlet}}
+      </div>
+    </script>
+
+    <script type='text/x-handlebars' id='post'>
+      {{#if editingMode}}
+        <button {{action doneEditing}}>Done</button>
+      {{else}}
+        <button {{action edit}}>Edit</button>
+      {{/if}}
+      <br/>
+      <h2>{{title}}</h2>
+      <hr>
+      <p>by {{author}}</p>
+      <p>@ {{date publishedAt}}</p>
+      <p>{{md intro}}</p>
+      <p>{{extended}}</p>
+    </script>
+
+    <script type='text/x-handlebars' id='about'>
+      <h1>About</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum ut tortor a placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum fermentum tellus in placerat faucibus. Sed consequat facilisis arcu nec lacinia. Sed auctor velit nec mollis lobortis. Maecenas dignissim egestas magna egestas scelerisque. Pellentesque vel consectetur magna. Morbi congue nec ligula vitae pellentesque. Suspendisse metus lectus, tempus vel fringilla eu, egestas volutpat massa.
+
+        Praesent sit amet mauris et tellus pulvinar scelerisque a in massa. Etiam aliquam interdum leo nec consequat. Pellentesque a aliquet eros. Suspendisse viverra volutpat blandit. Vestibulum a mauris condimentum, pharetra ante non, tempus tellus. Phasellus a diam vulputate, vestibulum dolor non, varius ante. Integer non lobortis velit, nec tincidunt massa.
+      </p>
+    </script>
+
+    <script src='js/jquery-1.9.1.js'></script>
+    <script src="js/handlebars-1.0.0.js"></script>
+    <script src='js/ember-1.0.0-rc.7.js'></script>
+    <script src='js/ember-data.min.js'></script>
+    <script src='js/showdown.js'></script>
+    <script src='js/moment.min.js'></script>
+    <script src='js/helpers.js'></script>
+    <script src='js/app.js'></script>
+  </body>
+</html>
