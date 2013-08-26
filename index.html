@@ -24,7 +24,7 @@
     </script>
 
     <script type='text/x-handlebars' id='posts'>
-      <div style="">
+      <div class="span2">
         {{#each model}}
           <div class="post">
             <h4 class="list-group-item-heading">{{#linkTo 'post' this}} {{title}} {{/linkTo}}</h4>
@@ -32,13 +32,18 @@
           </div>
         {{/each}}
       </div>
-      <div style="">
+      <div class="span6">
         {{outlet}}
       </div>
     </script>
 
+    <script type='text/x-handlebars' id='posts/index'>
+      Please select a post
+    </script>
+
     <script type='text/x-handlebars' id='post'>
       {{#if editingMode}}
+        {{partial 'post/edit'}}
         <button {{action doneEditing}}>Done</button>
       {{else}}
         <button {{action edit}}>Edit</button>
@@ -49,7 +54,16 @@
       <p>by {{author}}</p>
       <p>@ {{date publishedAt}}</p>
       <p>{{md intro}}</p>
-      <p>{{extended}}</p>
+      <p>{{md extended}}</p>
+    </script>
+
+    <script type='text/x-handlebars' id='post/_edit'>
+      <p>{{view Ember.TextField
+          valueBinding="title"}}</p>
+      <p>{{view Ember.TextArea
+          valueBinding="intro"}}</p>
+      <p>{{view Ember.TextArea
+          valueBinding="extended"}}</p>
     </script>
 
     <script type='text/x-handlebars' id='about'>
