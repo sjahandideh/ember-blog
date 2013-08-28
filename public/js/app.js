@@ -2,9 +2,6 @@ App = Ember.Application.create();
 
 App.Store = DS.Store.extend({
   revision: 13,
-  adapter:  DS.RESTAdapter.extend({
-    url: 'http://localhost:4567'
-  })
 });
 
 App.Router.map(function() {
@@ -30,7 +27,10 @@ App.PostController = Ember.ObjectController.extend({
   editingMode: false,
 
   doneEditing: function() {
-    this.set('editingMode', false);
+    var post = this.get('model');
+    //post.save();
+    //this.set('editingMode', false);
+    this.get('store').commit();
   },
 
   edit: function() {
